@@ -9,17 +9,46 @@
 // Make a stupid thing that uses other people's code to randomize some art i guess
 // - Use shellenbergs repository for the lols
 //  
-let superWebsiteInfo = {}
+
+let allTheShapes = [];
+let shapeInfo = {};
+let shapeTypes = ['circle', 'square'];
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   // Use the website
-  superWebsiteInfo = {
-    shapeTypes: [],
+  // These will be randomly generated in the future
+  // put this in a for loop.
+
+  for(let i = 0; i < 50; i++){
+    shapeInfo = {
+      shapeType: shapeTypes[random()], //This for some reason is not working
+      shapeSize: noise(i) * 25,
+      shapeColor: [random(255), random(255), random(255)],
+      shapeLocation: [random(width), random(height)]
+    }
+    allTheShapes.push(shapeInfo);
   }
+
 }
 
 function draw() {
-  background(220);
+  for(let i = 0; i < allTheShapes.length; i++){
+    if(allTheShapes[i].shapeType === 'circle'){
+      drawCircle(i);
+    }
+    if(allTheShapes[i].shapeType === 'square'){
+      drawRectangle(i);
+    }
+  }
+}
 
+function drawRectangle(i){
+  fill(allTheShapes[i].shapeColor);
+  rect(allTheShapes[i].shapeLocation[0], allTheShapes[i].shapeLocation[1], allTheShapes[i].shapeSize)
+}
+
+function drawCircle(i){
+  fill(allTheShapes[i].shapeColor);
+  circle(allTheShapes[i].shapeLocation[0], allTheShapes[i].shapeLocation[1], allTheShapes[i].shapeSize);
 }
