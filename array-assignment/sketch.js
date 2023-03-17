@@ -22,9 +22,9 @@ function setup() {
 
   for(let i = 0; i < 50; i++){
     shapeInfo = {
-      shapeType: shapeTypes[random()], //This for some reason is not working
-      shapeSize: noise(i) * 25,
-      shapeColor: [random(255), random(255), random(255)],
+      shapeType: random(shapeTypes), //New thing: If you put an array within a p5js random, you get a random part of the array
+      shapeSize: noise(i) * 40,
+      shapeColor: [random(255), random(115) + 140, random(255)],
       shapeLocation: [random(width), random(height)]
     }
     allTheShapes.push(shapeInfo);
