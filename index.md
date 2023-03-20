@@ -5,6 +5,7 @@
 - [squares](05-quadrilateralDisarray)
 - [perlin 2d terrain](07-perlinTerrainGen)
 - [perlin and timing](08-perlin)
+- [grid demo](09-2d-grid)
 
 ##projects
 - [Arrays and Object Notation](array-assignment)
