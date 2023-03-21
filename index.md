@@ -6,6 +6,7 @@
 - [perlin 2d terrain](07-perlinTerrainGen)
 - [perlin and timing](08-perlin)
 - [grid demo](09-2d-grid)
+- [color game](10-color-game)
 
 ##projects
 - [Arrays and Object Notation](array-assignment)
