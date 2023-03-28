@@ -1,7 +1,7 @@
 // IDK Yet
 // William Harris
 // March 23rd 2023
-// latest v23/03/23
+// latest v28/03/23
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
@@ -18,20 +18,41 @@
 // Make a graphing calculator? That sounds a little complicated.
 
 let grid;
-let fillArray;
+
+// I don't define these as constants just in case I ever redefine them.
+let arrayWidth, arrayHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+  arrayWidth, arrayHeight = 5
 
+  grid = createEmpty2DArray(arrayWidth, arrayHeight);
 }
 
 function draw() {
   background(220);
+  // Map the grid/2d array to the window
+  drawGrid(grid);
 }
 
-function fill2dArray() {
-  // Do i need an array that includes different objects?
-  fillArray = {
+function drawGrid(grid) {
+  // Remember that in order to map everything from the grid, you must use whichever dimension is smaller:
+  // 'windowWidth' vs 'windowHeight'
+  if(windowHeight < windowWidth){
+    // windowHeight / arrayHeight >>> gridBlockHeight?
+  }
+}
 
+function mouseIsPressed() {
+  // if mouseX.floor and mouseY.floor are within gridBlockLocation. (maybe divide by the gridHeight and then floor it.)
+}
+
+function createEmpty2DArray(arrayWidth, arrayHeight) {
+  // Do i need an array that includes different objects?
+  
+  for(let y=0; y<arrayHeight; y++){
+    for(let x=0; x<arrayWidth; x++){
+      grid[y][x] = 0
+    }
   }
 }
