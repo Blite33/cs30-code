@@ -26,7 +26,7 @@ function setup() {
   createCanvas(windowWidth, windowHeight);
   arrayWidth, arrayHeight = 5
 
-  createEmpty2DArray(arrayWidth, arrayHeight);
+  grid = createEmpty2DArray(arrayWidth, arrayHeight);
 }
 
 function draw() {
@@ -64,11 +64,13 @@ function mouseIsPressed() {
 
 function createEmpty2DArray(arrayWidth, arrayHeight) {
   // Do i need an array that includes different objects?
-  
+  let blackGrid = [];
+
   for(let y=0; y<arrayHeight; y++){
-    grid.push([]);
+    blackGrid.push([]);
     for(let x=0; x<arrayWidth; x++){
-      grid[y].push('black');
+      blackGrid[y].push('black');
     }
   }
+  return blackGrid;
 }
