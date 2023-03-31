@@ -20,11 +20,13 @@
 let grid = [];
 
 // I don't define these as constants just in case I ever redefine them.
-let arrayWidth, arrayHeight;
+let arrayWidth;
+let arrayHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  arrayWidth, arrayHeight = 5
+  arrayWidth = 5
+  arrayHeight = 5
 
   grid = createEmpty2DArray(arrayWidth, arrayHeight);
 }
@@ -45,21 +47,23 @@ function drawGrid(grid) {
   for(let y=0; y<grid.length; y++){
     for(let x=0; x<grid.length; x++){
       fill(grid[y][x])
-      rect((width/arrayWidth)*x, (height/arrayHeight)*y, (width/arrayWidth)*x+1, (height/arrayHeight)*y+1)
+      rect((height/arrayWidth)*x, (height/arrayHeight)*y, (height/arrayWidth)*x+(height/arrayWidth), (height/arrayHeight)*y+(height/arrayHeight))
     }
   }
 }
 
-function mouseIsPressed() {
+function mousePressed() {
   // if mouseX.floor and mouseY.floor are within gridBlockLocation. (maybe divide by the gridHeight and then floor it.)
-  let newMouseX = mouseX/height.floor //Assumes height
-  let newMouseY = mouseY/height.floor //Assumes height is the bigger of the two
-  if(grid[newMouseY][newMouseX] === 0){
+  let newMouseX = Math.floor(mouseX/(height/arrayHeight)); //Assumes height
+  let newMouseY = Math.floor(mouseY/(height/arrayHeight)); //Assumes height is the bigger of the two
+  console.log(newMouseX, newMouseY);
+  if(grid[newMouseY][newMouseX] === 'white'){
     grid[newMouseY][newMouseX] = 'black';
   }
   else{
     grid[newMouseY][newMouseX] = 'white';
   }
+  console.log(grid[newMouseY][newMouseY]);
 }
 
 function createEmpty2DArray(arrayWidth, arrayHeight) {
