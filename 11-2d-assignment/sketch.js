@@ -25,8 +25,8 @@ let arrayHeight;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  arrayWidth = 5
-  arrayHeight = 5
+  arrayWidth = 30
+  arrayHeight = 30
 
   grid = createEmpty2DArray(arrayWidth, arrayHeight);
 }
@@ -40,30 +40,27 @@ function draw() {
 function drawGrid(grid) {
   // Remember that in order to map everything from the grid, you must use whichever dimension is smaller:
   // 'windowWidth' vs 'windowHeight'
-  if(windowHeight < windowWidth){
-    // windowHeight / arrayHeight >>> gridBlockHeight?
-    let gridBlockHeight = windowHeight / arrayHeight;
-  }
-  for(let y=0; y<grid.length; y++){
-    for(let x=0; x<grid.length; x++){
+  // windowHeight / arrayHeight >>> gridBlockHeight?
+  let gridBlockHeight = windowHeight / arrayHeight;
+  for(let y=0; y<arrayHeight; y++){
+    for(let x=0; x<arrayWidth; x++){
       fill(grid[y][x])
-      rect((height/arrayWidth)*x, (height/arrayHeight)*y, (height/arrayWidth)*x+(height/arrayWidth), (height/arrayHeight)*y+(height/arrayHeight))
+      rect((gridBlockHeight)*x, (gridBlockHeight)*y, (gridBlockHeight)*(x+1), (gridBlockHeight)*(y+1))
     }
   }
 }
 
 function mousePressed() {
   // if mouseX.floor and mouseY.floor are within gridBlockLocation. (maybe divide by the gridHeight and then floor it.)
-  let newMouseX = Math.floor(mouseX/(height/arrayHeight)); //Assumes height
-  let newMouseY = Math.floor(mouseY/(height/arrayHeight)); //Assumes height is the bigger of the two
-  console.log(newMouseX, newMouseY);
+  let newMouseX = Math.floor(mouseX/(windowHeight/arrayHeight)); //Assumes height
+  let newMouseY = Math.floor(mouseY/(windowHeight/arrayHeight)); //Assumes height is the bigger of the two
   if(grid[newMouseY][newMouseX] === 'white'){
     grid[newMouseY][newMouseX] = 'black';
   }
   else{
     grid[newMouseY][newMouseX] = 'white';
   }
-  console.log(grid[newMouseY][newMouseY]);
+  console.log("Mouse Position:", newMouseX, newMouseY);
 }
 
 function createEmpty2DArray(arrayWidth, arrayHeight) {
