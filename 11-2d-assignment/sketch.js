@@ -20,8 +20,26 @@
 let grid = [];
 
 // I don't define these as constants just in case I ever redefine them.
-let arrayWidth;
-let arrayHeight;
+// Later note: This is actually useful if the user resizes window?
+let arrayWidth, arrayHeight;
+
+let numberStartXOffset, numberStartYOffset;
+
+let whatTheTimeIs = [0,0,0,0];
+
+function preload() {
+  number9 = loadStrings('assets/9.txt')
+  number8 = loadStrings('assets/8.txt')
+  number7 = loadStrings('assets/7.txt')
+  number6 = loadStrings('assets/6.txt')
+  number5 = loadStrings('assets/5.txt')
+  number4 = loadStrings('assets/4.txt')
+  number3 = loadStrings('assets/3.txt')
+  number2 = loadStrings('assets/2.txt')
+  number1 = loadStrings('assets/1.txt')
+  number0 = loadStrings('assets/0.txt')
+  numberColon = loadStrings('assets/colon.txt')
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -35,6 +53,12 @@ function draw() {
   background(220);
   // Map the grid/2d array to the window
   drawGrid(grid);
+  placeNumbersInGrid();
+  
+  // This time check misses out on the entire thing!!!
+  if(millis() % 1000 === 0){
+    whatIsTheTime();
+  }
 }
 
 function drawGrid(grid) {
@@ -50,18 +74,18 @@ function drawGrid(grid) {
   }
 }
 
-function mousePressed() {
-  // if mouseX.floor and mouseY.floor are within gridBlockLocation. (maybe divide by the gridHeight and then floor it.)
-  let newMouseX = Math.floor(mouseX/(windowHeight/arrayHeight)); //Assumes height
-  let newMouseY = Math.floor(mouseY/(windowHeight/arrayHeight)); //Assumes height is the bigger of the two
-  if(grid[newMouseY][newMouseX] === 'white'){
-    grid[newMouseY][newMouseX] = 'black';
-  }
-  else{
-    grid[newMouseY][newMouseX] = 'white';
-  }
-  console.log("Mouse Position:", newMouseX, newMouseY);
-}
+// function mousePressed() {
+//   // if mouseX.floor and mouseY.floor are within gridBlockLocation. (maybe divide by the gridHeight and then floor it.)
+//   let newMouseX = Math.floor(mouseX/(windowHeight/arrayHeight)); //Assumes height
+//   let newMouseY = Math.floor(mouseY/(windowHeight/arrayHeight)); //Assumes height is the bigger of the two
+//   if(grid[newMouseY][newMouseX] === 'white'){
+//     grid[newMouseY][newMouseX] = 'black';
+//   }
+//   else{
+//     grid[newMouseY][newMouseX] = 'white';
+//   }
+//   console.log("Mouse Position:", newMouseX, newMouseY);
+// }
 
 function createEmpty2DArray(arrayWidth, arrayHeight) {
   // Do i need an array that includes different objects?
@@ -74,4 +98,53 @@ function createEmpty2DArray(arrayWidth, arrayHeight) {
     }
   }
   return blackGrid;
+}
+
+function whatIsTheTime() {
+  whatTheTimeIs[3]++;
+  for(let i=whatTheTimeIs.length; i!==-1; i--){
+    if(whatTheTimeIs[i] = 10){
+      whatTheTimeIs[i] = 0;
+      whatTheTimeIs[i-1]++;
+      // find a way to catch the final statement
+    }
+  }
+  console.log(whatTheTimeIs);
+}
+
+function placeNumbersInGrid() {
+  // we need someplace to place our numbers down.
+  numberStartXOffset = 1;
+  numberStartYOffset = 1;
+
+  displayNumbers(whatTheTimeIs[0]);
+  numberStartXOffset += whatTheTimeIs[0].length-1;
+
+  displayNumbers(whatTheTimeIs[1])
+  numberStartXOffset += whatTheTimeIs[0].length-1;
+
+  displayNumbers(numberColon);
+  numberStartXOffset += numberColon.length-4;
+
+  displayNumbers(whatTheTimeIs[2]);
+  numberStartXOffset += whatTheTimeIs[2].length-1;
+
+  displayNumbers(whatTheTimeIs[3]);
+
+  //Make a for loop?
+  
+}
+
+function displayNumbers(numberDisplayed) {
+  // Map text file array to grid. Mode of displaying numbers.
+  for(let y=0; y<numberDisplayed.length; y++){
+    for(let x=0; x<numberDisplayed[y].length; x++){
+      if(numberDisplayed[y][x] === '0'){
+        grid[y+numberStartYOffset][x+numberStartXOffset] = 'white'
+      }
+      else if(numberDisplayed[y][x] === '-'){
+        grid[y+numberStartYOffset][x+numberStartXOffset] = 'black'
+      }
+    }
+  }
 }
