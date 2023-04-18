@@ -8,6 +8,7 @@
 - [grid demo](09-2d-grid)
 - [color game](10-color-game)
 - [walker oop](16-walker)
+- [Fireworks oop](18-fireworks)
 
 ##projects
 - [Arrays and Object Notation](array-assignment)
