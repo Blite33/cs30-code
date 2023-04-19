@@ -9,6 +9,7 @@
 - [color game](10-color-game)
 - [walker oop](16-walker)
 - [Fireworks oop](18-fireworks)
+- [Ball Array](19-ball-array)
 
 ##projects
 - [Arrays and Object Notation](array-assignment)
