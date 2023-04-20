@@ -49,6 +49,9 @@ function setup() {
   arrayHeight = 30
 
   grid = createEmpty2DArray(arrayWidth, arrayHeight);
+
+  // Stupid badness here. This is a stupid fix to a stupid problem. Make my life easier.
+  frameRate(30);
 }
 
 function draw() {
@@ -109,13 +112,23 @@ function whatIsTheTime() {
     // Please find a less fucky way to do this!! There's probably a way to find when a second has passed.
     // ALSO GOD FORBID YOU USE MILLIS(), GET THAT STUFF OUTTA YOUR MIND
     console.log(whatTheTimeIs);
-    for(let i=0; i<4; i++){
-      if(whatTheTimeIs[i] > 9){
-        whatTheTimeIs[i] = 0
-        whatTheTimeIs[i-1]++;
-      }
-    }
     whatTheTimeIs[3]++;
+    if(whatTheTimeIs[3] > 9){
+      whatTheTimeIs[3] = 0;
+      whatTheTimeIs[2]++;
+    }
+    if(whatTheTimeIs[2] > 5){
+      whatTheTimeIs[2] = 0;
+      whatTheTimeIs[1]++;
+    }
+    if(whatTheTimeIs[1] > 9){
+      whatTheTimeIs[1] = 0;
+      whatTheTimeIs[0] = 1;
+    }
+    if(whatTheTimeIs[0] === 1 && whatTheTimeIs[1] === 2){
+      whatTheTimeIs[0] = 0;
+      whatTheTimeIs[1] = 0;
+    }
   }
 }
 
