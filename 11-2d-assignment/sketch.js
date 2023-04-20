@@ -25,6 +25,8 @@ let arrayWidth, arrayHeight;
 
 let numberStartXOffset, numberStartYOffset;
 
+let secondHelper = 0;
+
 let whatTheTimeIs = [0,0,0,0];
 
 function preload() {
@@ -54,11 +56,12 @@ function draw() {
   // Map the grid/2d array to the window
   drawGrid(grid);
   placeNumbersInGrid();
+  whatIsTheTime();
   
-  // This time check misses out on the entire thing!!!
-  if(millis() % 1000 === 0){
-    whatIsTheTime();
-  }
+  // // This time check misses out on the entire thing!!!
+  // if(millis() % 1000 === 0){
+  //   whatIsTheTime();
+  // }
 }
 
 function drawGrid(grid) {
@@ -101,15 +104,19 @@ function createEmpty2DArray(arrayWidth, arrayHeight) {
 }
 
 function whatIsTheTime() {
-  whatTheTimeIs[3]++;
-  for(let i=whatTheTimeIs.length; i!==-1; i--){
-    if(whatTheTimeIs[i] = 10){
-      whatTheTimeIs[i] = 0;
-      whatTheTimeIs[i-1]++;
-      // find a way to catch the final statement
+  secondHelper++;
+  if(secondHelper % 30 === 0){ // The value needs to change based on the refresh rate (60hz >> 30, 120hz >> 60)
+    // Please find a less fucky way to do this!! There's probably a way to find when a second has passed.
+    // ALSO GOD FORBID YOU USE MILLIS(), GET THAT STUFF OUTTA YOUR MIND
+    console.log(whatTheTimeIs);
+    for(let i=0; i<4; i++){
+      if(whatTheTimeIs[i] > 9){
+        whatTheTimeIs[i] = 0
+        whatTheTimeIs[i-1]++;
+      }
     }
+    whatTheTimeIs[3]++;
   }
-  console.log(whatTheTimeIs);
 }
 
 function placeNumbersInGrid() {
