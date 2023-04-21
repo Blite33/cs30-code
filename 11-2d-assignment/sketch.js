@@ -46,7 +46,7 @@ function setup() {
   grid = createEmpty2DArray(arrayWidth, arrayHeight);
 
   // Stupid badness here. This is a stupid fix to a stupid problem. Make my life easier.
-  frameRate(30);
+  frameRate(60);
 }
 
 function draw() {
