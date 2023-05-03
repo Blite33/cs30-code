@@ -10,6 +10,7 @@
 - [walker oop](16-walker)
 - [Fireworks oop](18-fireworks)
 - [Ball Array](19-ball-array)
+- [Using Timers](21-timers)
 
 ##projects
 - [Arrays and Object Notation](array-assignment)
