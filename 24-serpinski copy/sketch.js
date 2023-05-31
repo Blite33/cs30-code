@@ -1,0 +1,44 @@
+// Sierpinski Triangle
+
+let triangleVertices = []
+
+let depth = 5;
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  triangleVertices.push({x: height*sqrt(2)/2, y: 50})
+  triangleVertices.push({x: 50, y: height-50})
+  triangleVertices.push({x: height*sqrt(2)-50, y: height-50})
+}
+
+function draw() {
+  sierpinski(triangleVertices, depth);
+}
+
+function sierpinski(points, depth){
+  triangle(points[0].x, points[0].y,
+    points[1].x, points[1].y,
+    points[2].x, points[2].y)
+  if(depth > 0) {
+    sierpinski([getMidpoint(points[0], points[1]),
+                points[1],
+                getMidpoint(points[0], points[2]),],
+              depth-1);
+    sierpinski([getMidpoint(points[0], points[1]),
+                getMidpoint(points[1], points[2]),
+                points[2]],
+              depth-1);
+    sierpinski([points[0],
+                getMidpoint(points[2], points[1]),
+                getMidpoint(points[0], points[2]),],
+              depth-1);
+
+  }
+}
+
+function getMidpoint(point1, point2){
+  let xDiff = point1.x + point2.x;
+  let yDiff = point1.y + point2.y;
+  let theMidpoint = {x: xDiff/2, y: yDiff/2};
+  return theMidpoint;
+}
